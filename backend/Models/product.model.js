@@ -3,31 +3,32 @@ const mongoose = require('mongoose')
 const productSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: [true, 'Name is required'],
     },
     description: {
         type: String,
-        required: true
+        required: [true, 'Description is required'],
     },
     price: {
         type: Number,
-        required: true
+        required: [true, 'Price is required'],
+        min: [0, 'Price must be a positive number'],
     },
     image: {
         type: Array,
-        required: true
+        required: [true, 'Image is required'],
     },
     category: {
         type: String,
-        required: true
+        required: [true, 'Category is required'],
     },
     subCategory: {
         type: String,
-        required: true
+        required: [true, 'SubCategory is required'],
     },
     sizes: {
         type: Array,
-        required: true
+        required: [true, 'Sizes is required'],
     },
     bestseller: {
         type: Boolean,
@@ -35,7 +36,7 @@ const productSchema = new mongoose.Schema({
     },
     date: {
         type: Number,
-        required: true
+        required: [true, 'Date is required'],
     },
 }, {
     timestamps: true,
