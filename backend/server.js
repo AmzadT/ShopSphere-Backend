@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-const mongoose = require('mongoose'); 
+// const mongoose = require('mongoose'); 
 const app = express();
 
 const Connection = require('./Config/db');
@@ -46,13 +46,13 @@ app.use((req, res) => {
 });
 
 // Error Handling Middleware
-app.use((err, req, res, next) => {
-    console.error(`Error: ${err.message}`);
-    if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
-        return res.status(400).json({ success: false, message: 'Invalid JSON format in request body' });
-    }
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
-});
+// app.use((err, req, res, next) => {
+//     console.error(`Error: ${err.message}`);
+//     if (err instanceof SyntaxError && err.status === 400 && 'body' in err) {
+//         return res.status(400).json({ success: false, message: 'Invalid JSON format in request body' });
+//     }
+//     res.status(500).json({ success: false, message: 'Internal Server Error' });
+// });
 
 // Start Server
 app.listen(PORT, async () => {
@@ -66,18 +66,18 @@ app.listen(PORT, async () => {
 });
 
 // Graceful shutdown handler
-process.on('SIGINT', async () => {
-    console.log('Shutting down gracefully...');
+// process.on('SIGINT', async () => {
+//     console.log('Shutting down gracefully...');
     
-    try {
-        await mongoose.connection.close();
-        console.log('Database connection closed successfully');
-    } catch (error) {
-        console.error(`Error closing database connection: ${error.message}`);
-    }
-    console.log('Cleanup complete. Exiting process...');
-    process.exit(0);
-});
+//     try {
+//         await mongoose.connection.close();
+//         console.log('Database connection closed successfully');
+//     } catch (error) {
+//         console.error(`Error closing database connection: ${error.message}`);
+//     }
+//     console.log('Cleanup complete. Exiting process...');
+//     process.exit(0);
+// });
 
 
 
